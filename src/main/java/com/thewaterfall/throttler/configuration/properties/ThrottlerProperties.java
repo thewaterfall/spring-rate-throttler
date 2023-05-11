@@ -6,16 +6,16 @@ public class ThrottlerProperties {
     @Value("${throttler.global.enabled:false}")
     private boolean enabled;
 
-    @Value("${throttler.global.capacity}")
+    @Value("${throttler.global.capacity:1}")
     private Integer capacity;
 
-    @Value("${throttler.global.refill}")
+    @Value("${throttler.global.refill:1}")
     private Integer refill;
 
-    @Value("${throttler.global.refill-period}")
+    @Value("${throttler.global.refill-period:1}")
     private Integer refillPeriod;
 
-    @Value("${throttler.global.refill-period-unit}")
+    @Value("${throttler.global.refill-period-unit:SECONDS}")
     private String refillPeriodUnit;
 
     @Value("${throttler.global.key-type:IP_ADDRESS}")
