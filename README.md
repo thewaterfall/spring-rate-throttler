@@ -101,16 +101,16 @@ public class ErrorHandler {
 
 Global configuration is applied to all the requests and endpoints. Additionally, cache can be configured.
 
-| Property                                             | Description                                                                                |
-|------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| throttler.global.enabled                             | enables global configuration                                                               |
-| throttler.global.capacity                            | initial and maximum capacity of requests                                                   |
-| throttler.global.refill                              | number of requests that are refilled (usually is equal to capacity)                        |
-| throttler.global.refill-period                       | the period per which a number of requests (see refill property) are refilled               |
-| throttler.global.refill-period-unit                  | the unit of time used for the refill period (in ChronoUnit, e.g. SECONDS, MINUTES, etc.)   |
-| throttler.global.key-type                            | the type of key used to identify the source or user of the request (supported: IP_ADDRESS) |
-| throttler.cache.in-memory.expire-after-write-seconds | instructs cache to expire after specified amount of seconds                                |
-| throttler.cache.in-memory.max-size                   | sets up maximum size of cache                                                              |
+| Property                                                | Description                                                                                |
+|---------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| throttler.global.enabled                                | enables global configuration                                                               |
+| throttler.global.capacity                               | initial and maximum capacity of requests                                                   |
+| throttler.global.refill                                 | number of requests that are refilled (usually is equal to capacity)                        |
+| throttler.global.refill-period                          | the period per which a number of requests (see refill property) are refilled               |
+| throttler.global.refill-period-unit                     | the unit of time used for the refill period (in ChronoUnit, e.g. SECONDS, MINUTES, etc.)   |
+| throttler.global.key-type                               | the type of key used to identify the source or user of the request (supported: IP_ADDRESS) |
+| throttler.cache.in-memory.expire-after-access-seconds   | instructs cache to expire after specified amount of seconds being not accessed (stale)     |
+| throttler.cache.in-memory.max-size                      | sets up maximum size of cache                                                              |
 
 ### Class and method level configuration
 

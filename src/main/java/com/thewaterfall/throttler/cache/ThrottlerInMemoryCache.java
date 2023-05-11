@@ -11,18 +11,18 @@ import org.springframework.beans.factory.annotation.Value;
 public class ThrottlerInMemoryCache {
     private Cache<ThrottlerKey, TokenBucket> cache;
 
-    @Value("${throttler.cache.in-memory.expire-after-write-seconds:3600}")
+    @Value("${throttler.cache.in-memory.expire-after-access-seconds:3600}")
     private int expireAfterWriteSeconds;
 
-    @Value("${throttler.cache.in-memory.max-size:10000}")
+    @Value("${throttler.cache.in-memory.max-size:100000}")
     private int maxSize;
 
     @PostConstruct
     public void init() {
         cache = Caffeine.newBuilder()
-                .expireAfterWrite(expireAfterWriteSeconds, TimeUnit.SECONDS)
-                .maximumSize(maxSize)
-                .build();
+            .expireAfterAccess(expireAfterWriteSeconds, TimeUnit.SECONDS)
+            .maximumSize(maxSize)
+            .build();
     }
 
     public Cache<ThrottlerKey, TokenBucket> getCache() {
