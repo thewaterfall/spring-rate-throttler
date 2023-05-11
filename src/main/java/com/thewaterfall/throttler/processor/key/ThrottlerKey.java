@@ -1,6 +1,7 @@
 package com.thewaterfall.throttler.processor.key;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * Represents a key used for throttling requests.
@@ -39,6 +40,25 @@ public class ThrottlerKey {
 
     public void setKeyValue(String keyValue) {
         this.keyValue = keyValue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ThrottlerKey that = (ThrottlerKey) o;
+        return Objects.equals(method, that.method) &&
+            Objects.equals(keyValue, that.keyValue) &&
+            keyType == that.keyType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(method, keyType, keyValue);
     }
 
     @Override
