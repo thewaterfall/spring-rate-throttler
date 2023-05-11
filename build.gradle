@@ -1,9 +1,36 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'com.thewaterfall.throttler'
-version '1.0-SNAPSHOT'
+version '1.0.0-SNAPSHOT'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.thewaterfall'
+            artifactId = 'throttler'
+            version = '1.0.0-SNAPSHOT'
+            from components.java
+
+            pom {
+                name = 'Spring Rate-Throttler'
+                description = 'A library for rate-limiting (throttling) HTTP requests in Spring applications. ' +
+                        'It provides annotations to be used on controller methods or classes to enforce ' +
+                        'rate-limiting and uses a token bucket algorithm to limit the number of requests that ' +
+                        'can be made in a certain period of time.'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+            }
+        }
+    }
+}
 
 repositories {
     mavenCentral()
