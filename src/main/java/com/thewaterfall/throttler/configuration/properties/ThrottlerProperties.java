@@ -21,6 +21,9 @@ public class ThrottlerProperties {
     @Value("${throttler.global.key-type:IP_ADDRESS}")
     private String keyType;
 
+    @Value("${throttler.global.key-source:'}")
+    private String keySource;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -43,5 +46,9 @@ public class ThrottlerProperties {
 
     public String getKeyType() {
         return keyType;
+    }
+
+    public String getKeySource() {
+        return keySource;
     }
 }

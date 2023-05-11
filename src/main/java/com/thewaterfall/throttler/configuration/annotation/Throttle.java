@@ -55,6 +55,13 @@ public @interface Throttle {
     ThrottlerKeyType key() default ThrottlerKeyType.IP_ADDRESS;
 
     /**
+     * The source name used to identify the source or user of the request.
+     *
+     * @return key
+     */
+    String source() default "";
+
+    /**
      * Indicates whether annotated method should be skipped (useful when you have annotation
      * on a class level but want to exclude some specific method).
      *

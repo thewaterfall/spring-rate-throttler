@@ -57,7 +57,7 @@ public class ThrottlerProcessor {
             return true;
         }
 
-        ThrottlerKey key = keyProcessor.process(request, method, throttle.get().key());
+        ThrottlerKey key = keyProcessor.process(request, method, throttle.get());
         TokenBucket bucket = cache.getCache().getIfPresent(key);
 
         if (Objects.isNull(bucket)) {
@@ -130,6 +130,11 @@ public class ThrottlerProcessor {
             @Override
             public ThrottlerKeyType key() {
                 return ThrottlerKeyType.valueOf(ThrottlerKeyType.class, properties.getKeyType());
+            }
+
+            @Override
+            public String source() {
+                return properties.getKeySource();
             }
 
             @Override

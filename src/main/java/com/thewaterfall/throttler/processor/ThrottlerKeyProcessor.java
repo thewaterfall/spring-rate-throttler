@@ -1,8 +1,8 @@
 package com.thewaterfall.throttler.processor;
 
 import java.lang.reflect.Method;
+import com.thewaterfall.throttler.configuration.annotation.Throttle;
 import com.thewaterfall.throttler.processor.key.ThrottlerKey;
-import com.thewaterfall.throttler.processor.key.ThrottlerKeyType;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -16,11 +16,11 @@ public class ThrottlerKeyProcessor {
      *
      * @param request The {@code HttpServletRequest} object representing the incoming request.
      * @param method The {@code Method} object representing the method being throttled.
-     * @param type The {@code ThrottlerKeyType} object representing the type of key used to identify
-     *             the source or user of the request.
+     * @param throttle The {@code Throttle} object representing annotation with throttle data.
      * @return A {@code ThrottlerKey} object representing the key used for throttling.
      */
-    public ThrottlerKey process(HttpServletRequest request, Method method, ThrottlerKeyType type) {
-        return new ThrottlerKey(method, type, type.getEvaluator().evaluate(request));
+    public ThrottlerKey process(HttpServletRequest request, Method method, Throttle throttle) {
+        return new ThrottlerKey(method, throttle.key(),
+            throttle.key().getEvaluator().evaluate(request, throttle));
     }
 }
