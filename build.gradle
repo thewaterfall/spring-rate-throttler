@@ -6,6 +6,11 @@ plugins {
 group 'com.thewaterfall.throttler'
 version '1.0.0-SNAPSHOT'
 
+java {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
