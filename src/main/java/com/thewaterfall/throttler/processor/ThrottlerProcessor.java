@@ -53,7 +53,7 @@ public class ThrottlerProcessor {
     public boolean throttle(HttpServletRequest request, Method method) throws ThrottleException {
         Optional<Throttle> throttle = findThrottleAnnotation(method);
 
-        if (throttle.isEmpty()) {
+        if (throttle.isEmpty() || throttle.get().skip()) {
             return true;
         }
 
@@ -130,6 +130,11 @@ public class ThrottlerProcessor {
             @Override
             public ThrottlerKeyType key() {
                 return ThrottlerKeyType.valueOf(ThrottlerKeyType.class, properties.getKeyType());
+            }
+
+            @Override
+            public boolean skip() {
+                return false;
             }
 
             @Override

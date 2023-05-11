@@ -24,21 +24,21 @@ public @interface Throttle {
      *
      * @return capacity
      */
-    int capacity();
+    int capacity() default 1;
 
     /**
      * The number of requests that are refilled per specified period (see period field).
      *
      * @return refill
      */
-    int refill();
+    int refill() default 1;
 
     /**
      * The period per which a number of requests (see refill field) are refilled
      *
      * @return period
      */
-    int period();
+    int period() default 1;
 
     /**
      * The unit of time used for the period.
@@ -53,4 +53,12 @@ public @interface Throttle {
      * @return key
      */
     ThrottlerKeyType key() default ThrottlerKeyType.IP_ADDRESS;
+
+    /**
+     * Indicates whether annotated method should be skipped (useful when you have annotation
+     * on a class level but want to exclude some specific method).
+     *
+     * @return skip
+     */
+    boolean skip() default false;
 }
