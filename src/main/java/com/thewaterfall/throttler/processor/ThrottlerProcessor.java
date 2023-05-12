@@ -4,6 +4,7 @@ package com.thewaterfall.throttler.processor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.isomorphism.util.TokenBucket;
 import org.isomorphism.util.TokenBuckets;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.AntPathMatcher;
 
 /**
  * The {@code ThrottlerProcessor} class is responsible for processing requests and throttling them
@@ -51,7 +53,7 @@ public class ThrottlerProcessor {
      *                           the request limit.
      */
     public boolean throttle(HttpServletRequest request, Method method) throws ThrottleException {
-        Optional<Throttle> throttle = findThrottleAnnotation(method);
+        Optional<Throttle> throttle = findThrottleAnnotation(method, request);
 
         if (throttle.isEmpty() || throttle.get().skip()) {
             return true;
@@ -80,7 +82,7 @@ public class ThrottlerProcessor {
         return true;
     }
 
-    private Optional<Throttle> findThrottleAnnotation(Method method) {
+    private Optional<Throttle> findThrottleAnnotation(Method method, HttpServletRequest request) {
         Throttle throttle = null;
 
         // Method level
@@ -99,10 +101,10 @@ public class ThrottlerProcessor {
         }
 
         // Global level
-        return getGlobalLevelThrottle();
+        return getGlobalLevelThrottle(request);
     }
 
-    private Optional<Throttle> getGlobalLevelThrottle() {
+    private Optional<Throttle> getGlobalLevelThrottle(HttpServletRequest request) {
         if (!properties.isEnabled()) {
             return Optional.empty();
         }
@@ -139,7 +141,7 @@ public class ThrottlerProcessor {
 
             @Override
             public boolean skip() {
-                return false;
+                return isPathIgnored(request.getServletPath());
             }
 
             @Override
@@ -147,5 +149,10 @@ public class ThrottlerProcessor {
                 return Throttle.class;
             }
         });
+    }
+
+    private boolean isPathIgnored(String requestedPath) {
+        return Arrays.stream(properties.getIgnorePaths())
+            .anyMatch(ignoredPath -> new AntPathMatcher().match(ignoredPath, requestedPath));
     }
 }

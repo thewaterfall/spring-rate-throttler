@@ -24,6 +24,9 @@ public class ThrottlerProperties {
     @Value("${throttler.global.key-source:'}")
     private String keySource;
 
+    @Value("${throttler.global.ignore-paths:'}")
+    private String[] ignorePaths = new String[0];
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -50,5 +53,9 @@ public class ThrottlerProperties {
 
     public String getKeySource() {
         return keySource;
+    }
+
+    public String[] getIgnorePaths() {
+        return ignorePaths;
     }
 }
