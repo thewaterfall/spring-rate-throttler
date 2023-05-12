@@ -66,7 +66,7 @@ Library is based on such terms and properties as:
 - **Throttle refill period**: the period per which a number of requests (see refill property) are refilled
 - **Throttle refill period unit**: the unit of time used for the refill period (in ChronoUnit, e.g. SECONDS, MINUTES, etc.)
 - **Throttle key**: the type of key used to identify the source or user of the request (supported: IP_ADDRESS, HEADER)
-- **Throttle key**: the source of the key used to retrieve value from (header name, etc.)
+- **Throttle key source**: the source of the key used to retrieve value from (header name, etc.)
 
 ### Throttler enabling
 
