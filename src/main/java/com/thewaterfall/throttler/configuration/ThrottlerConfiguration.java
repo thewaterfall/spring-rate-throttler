@@ -11,14 +11,17 @@ import org.springframework.context.annotation.Configuration;
 public class ThrottlerConfiguration {
 
     @Bean
-    public ThrottlerWebMvcConfigurer throttlerWebMvcConfigurer(ThrottlerInMemoryCache cache,
-                                                               ThrottlerProperties properties) {
-        ThrottlerProcessor throttlerProcessor =
-            new ThrottlerProcessor(cache, new ThrottlerKeyProcessor(), properties);
-
-        return new ThrottlerWebMvcConfigurer(new ThrottlerInterceptor(throttlerProcessor));
+    public ThrottlerWebMvcConfigurer throttlerWebMvcConfigurer() {
+        return new ThrottlerWebMvcConfigurer(throttlerInterceptor());
     }
 
+    @Bean
+    public ThrottlerInterceptor throttlerInterceptor()  {
+      ThrottlerProcessor throttlerProcessor =
+          new ThrottlerProcessor(throttlerInMemoryCache(), new ThrottlerKeyProcessor(), throttlerProperties());
+
+      return new ThrottlerInterceptor(throttlerProcessor);
+    }
 
     @Bean
     public ThrottlerProperties throttlerProperties() {
