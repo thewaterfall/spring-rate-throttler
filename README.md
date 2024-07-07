@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.thewaterfall:spring-rate-throttler:1.0.0'
+    implementation 'com.github.thewaterfall:spring-rate-throttler:1.0.1'
 }
 ```
 
@@ -50,7 +50,7 @@ Add the following to your pom.xml file:
     <dependency>
         <groupId>com.github.thewaterfall</groupId>
         <artifactId>spring-rate-throttler</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 </dependencies>
 ```
