@@ -15,8 +15,9 @@ to your Spring application.
 - Annotation and application properties based.
 - Configurable rate limiting policies based on different criteria (global level, class level and method level configuration).
 - Support for customizable rate limiting exception handling.
-- In-memory caching using [Caffeine](https://github.com/ben-manes/caffeine) for high performance.
+- [Caffeine](https://github.com/ben-manes/caffeine) in-memory caching for high performance.
 - [Token bucket](https://github.com/bbeck/token-bucket) algorithm for rate limiting.
+- [Ip4j](https://github.com/thewaterfall/ip4j) tiny library for retrieving request IP address for rate limiting.
 
 ## Installation
 Spring Rate Throttler can be easily installed using JitPack, see Gradle and Maven examples below.

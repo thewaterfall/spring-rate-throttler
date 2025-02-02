@@ -45,6 +45,7 @@ publishing {
 
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -55,6 +56,7 @@ dependencies {
     implementation 'org.springframework:spring-webmvc:6.0.8'
     implementation 'com.github.ben-manes.caffeine:caffeine:3.1.6'
     implementation 'org.isomorphism:token-bucket:1.6'
+    implementation 'com.github.thewaterfall:ip4j:1.0.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
