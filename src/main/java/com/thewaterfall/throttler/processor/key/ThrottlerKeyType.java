@@ -1,6 +1,7 @@
 package com.thewaterfall.throttler.processor.key;
 
 import com.thewaterfall.throttler.processor.ThrottlerProcessor;
+import com.thewaterfall.throttler.processor.key.evaluator.impl.CookieThrottlerKeyEvaluator;
 import com.thewaterfall.throttler.processor.key.evaluator.impl.HeaderThrottlerKeyEvaluator;
 import com.thewaterfall.throttler.processor.key.evaluator.ThrottlerKeyEvaluator;
 import com.thewaterfall.throttler.processor.key.evaluator.impl.IpAddressThrottlerKeyEvaluator;
@@ -12,14 +13,19 @@ import com.thewaterfall.throttler.processor.key.evaluator.impl.IpAddressThrottle
  */
 public enum ThrottlerKeyType {
     /**
-     * A throttler key type that evaluates the IP address of the requester.
+     * A throttler key type that uses an IP address of the requester as a key.
      */
     IP_ADDRESS(new IpAddressThrottlerKeyEvaluator()),
 
     /**
-     * A throttler key type that evaluates header of the requester.
+     * A throttler key type that uses a header of the requester as a key.
      */
-    HEADER(new HeaderThrottlerKeyEvaluator());
+    HEADER(new HeaderThrottlerKeyEvaluator()),
+
+    /**
+     * A throttler key type that uses a cookie of the requester as a key.
+     */
+    COOKIE(new CookieThrottlerKeyEvaluator());
 
     private final ThrottlerKeyEvaluator evaluator;
 
