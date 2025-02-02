@@ -51,7 +51,7 @@ Add the following to your pom.xml file:
     <dependency>
         <groupId>com.github.thewaterfall</groupId>
         <artifactId>spring-rate-throttler</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencies>
 ```
