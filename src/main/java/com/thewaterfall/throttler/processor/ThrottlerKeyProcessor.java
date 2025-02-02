@@ -20,7 +20,7 @@ public class ThrottlerKeyProcessor {
      * @return A {@code ThrottlerKey} object representing the key used for throttling.
      */
     public ThrottlerKey process(HttpServletRequest request, Method method, Throttle throttle) {
-        return new ThrottlerKey(method, throttle.key(),
+        return new ThrottlerKey(method.toGenericString(), throttle.key(),
             throttle.key().getEvaluator().evaluate(request, throttle));
     }
 }

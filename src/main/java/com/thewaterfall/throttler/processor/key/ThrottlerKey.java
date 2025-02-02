@@ -1,29 +1,27 @@
 package com.thewaterfall.throttler.processor.key;
 
-import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
  * Represents a key used for throttling requests.
  */
 public class ThrottlerKey {
-    private Method method;
-
+    private String methodSignature;
     private ThrottlerKeyType keyType;
     private String keyValue;
 
-    public ThrottlerKey(Method method, ThrottlerKeyType keyType, String keyValue) {
-        this.method = method;
+    public ThrottlerKey(String methodSignature, ThrottlerKeyType keyType, String keyValue) {
+        this.methodSignature = methodSignature;
         this.keyType = keyType;
         this.keyValue = keyValue;
     }
 
-    public Method getMethod() {
-        return method;
+    public String getMethodSignature() {
+        return methodSignature;
     }
 
-    public void setMethod(Method method) {
-        this.method = method;
+    public void setMethodSignature(String methodSignature) {
+        this.methodSignature = methodSignature;
     }
 
     public ThrottlerKeyType getKeyType() {
@@ -51,20 +49,20 @@ public class ThrottlerKey {
             return false;
         }
         ThrottlerKey that = (ThrottlerKey) o;
-        return Objects.equals(method, that.method) &&
+        return Objects.equals(methodSignature, that.methodSignature) &&
             Objects.equals(keyValue, that.keyValue) &&
             keyType == that.keyType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(method, keyType, keyValue);
+        return Objects.hash(methodSignature, keyType, keyValue);
     }
 
     @Override
     public String toString() {
         return "ThrottlerKey{" +
-            "method=" + method +
+            "method=" + methodSignature +
             ", keyType=" + keyType +
             ", keyValue='" + keyValue + '\'' +
             '}';
